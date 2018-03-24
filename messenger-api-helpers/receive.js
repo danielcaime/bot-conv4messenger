@@ -80,12 +80,12 @@ const handleReceiveMessage_old = (event) => {
 
 const handleReceiveMessage = (event) => {
   const message = event.message;
-  const senderId = event.sender.id;
+  const senderID = event.sender.id;
   var messageText = message.text.toLowerCase();
   // It's good practice to send the user a read receipt so they know
   // the bot has seen the message. This can prevent a user
   // spamming the bot if the requests take some time to return.
-  sendApi.sendReadReceipt(senderId);
+  sendApi.sendReadReceipt(senderID);
 
   //if (message.text) { sendApi.sendHelloRewardMessage(senderId); }
   if (messageText) {
