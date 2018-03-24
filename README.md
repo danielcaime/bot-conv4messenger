@@ -141,4 +141,3 @@ $ yarn start
 $ cd path/to/repo/gui-webview
 $ yarn quality
 ```
-"# web-view" 
