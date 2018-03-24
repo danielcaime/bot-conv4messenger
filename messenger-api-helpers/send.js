@@ -69,7 +69,7 @@ const sendTextMessage = (recipientId, messageText) => {
   //callSendAPI(messageData);
   api.callMessagesAPI([
     typingOn(recipientId),
-    ...messageData,
+    ...[messagePayloadArray],
     typingOff(recipientId),
   ]);
 }
