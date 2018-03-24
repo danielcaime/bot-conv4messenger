@@ -55,6 +55,24 @@ const sendMessage = (recipientId, messagePayloads) => {
   ]);
 };
 
+const sendTextMessage = (recipientId, messageText) => {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText,
+      metadata: "DEVELOPER_DEFINED_METADATA"
+    }
+  };
+
+  //callSendAPI(messageData);
+  api.callMessagesAPI([
+    typingOn(recipientId),
+    ...messageData,
+    typingOff(recipientId),
+  ]);
+}
 // Send a read receipt to indicate the message has been read
 const sendReadReceipt = (recipientId) => {
   const messageData = {
@@ -111,4 +129,5 @@ export default {
   sendChooseGiftMessage,
   sendGiftChangedMessage,
   sendGiftPurchasedMessage,
+  sendTextMessage,
 };
