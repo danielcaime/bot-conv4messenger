@@ -55,6 +55,7 @@ const sendMessage = (recipientId, messagePayloads) => {
   ]);
 };
 
+//send text message
 const sendTextMessage = (recipientId, messageText) => {
   var messageData = {
     recipient: {

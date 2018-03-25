@@ -1,5 +1,5 @@
 /**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
+ * dcaime
  *
  * This source code is licensed under the license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,6 +7,7 @@
 
 // ===== MODULES ===============================================================
 import sendApi from './send';
+import Wit from 'node-wit';
 
 // ===== STORES ================================================================
 import UserStore from '../stores/user-store';
@@ -92,9 +93,19 @@ const handleReceiveMessage = (event) => {
     // If we receive a text message, check to see if it matches any special
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
+
+    wit.message(text).then(({entities}) => {
+      // You can customize your response to these entities
+      console.log(entities);
+      // For now, let's reply with another automatic message
+      sendApi.sendTextMessage(sender, `We've received your message: ${text}.`);
+    })
+    .catch((err) => {
+      console.error('Oops! Got an error from Wit: ', err.stack || err);
+    })
+  
     switch (messageText) {
       
-
       case 'list':
         console.log('llamada a la lista');
         break;
