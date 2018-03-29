@@ -94,11 +94,11 @@ const handleReceiveMessage = (event) => {
     // keywords and send back the corresponding example. Otherwise, just echo
     // the text we received.
 
-    wit.message(text).then(({entities}) => {
+    wit.message(messageText).then(({entities}) => {
       // You can customize your response to these entities
       console.log(entities);
       // For now, let's reply with another automatic message
-      sendApi.sendTextMessage(sender, `We've received your message: ${text}.`);
+      sendApi.sendTextMessage(sender, `We've received your message: ${messageText}.`);
     })
     .catch((err) => {
       console.error('Oops! Got an error from Wit: ', err.stack || err);
