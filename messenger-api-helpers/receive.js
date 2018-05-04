@@ -113,7 +113,7 @@ const handleReceiveMessage = (event) => {
       default:
         //sendTextMessage(senderID, messageText);
         console.log('entra por el default');
-        sendApi.sendTextMessage(senderID,messageText);
+        sendApi.sendTextMessage(senderID,messageText + entities);
     }
   } else if (messageAttachments) {
     sendApi.sendTextMessage(senderID, "Message with attachment received");
