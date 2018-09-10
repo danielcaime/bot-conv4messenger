@@ -67,7 +67,7 @@ const handleReceivePostback = (event) => {
  * of message that was received. Read more at: https://developers.facebook.com/
  * docs/messenger-platform/webhook-reference/message-received
  */
-const handleReceiveMessage_old = (event) => {
+const handleReceiveMessage = (event) => {
   const message = event.message;
   const senderId = event.sender.id;
 
@@ -79,7 +79,7 @@ const handleReceiveMessage_old = (event) => {
   if (message.text) { sendApi.sendHelloRewardMessage(senderId); }
 };
 
-const handleReceiveMessage = (event) => {
+const handleReceiveMessage_other = (event) => {
   const message = event.message;
   const senderID = event.sender.id;
   var messageText = message.text.toLowerCase();
