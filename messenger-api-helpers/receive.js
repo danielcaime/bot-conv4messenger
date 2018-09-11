@@ -98,7 +98,7 @@ const handleReceiveMessage = (event) => {
       // You can customize your response to these entities
       console.log(entities);
       // For now, let's reply with another automatic message
-      sendApi.sendTextMessage(sender, `We've received your message: ${messageText}.`);
+      sendApi.sendTextMessage(sender, `We've received your message: ${messageText + entities}.`);
     })
     .catch((err) => {
       console.error('Oops! Got an error from Wit: ', err.stack || err);
