@@ -26,7 +26,6 @@ const handleNewGiftPurchased = (senderId, giftId) => {
   sendApi.sendGiftPurchasedMessage(senderId, giftId);
 };
 
-
 /*
  * handleReceivePostback — Postback event handler triggered by a postback
  * action you, the developer, specify on a button in a template. Read more at:
@@ -113,7 +112,8 @@ const handleReceiveMessage = (event) => {
       default:
         //sendTextMessage(senderID, messageText);
         console.log('entra por el default');
-        sendApi.sendTextMessage(senderID,messageText + entities);
+        //sendApi.sendTextMessage(senderID,messageText + entities);
+        sendApi.sendTextMessage(senderID,messageText + entities.intent[0].value);
     }
   } else if (messageAttachments) {
     sendApi.sendTextMessage(senderID, "Message with attachment received");
@@ -138,7 +138,7 @@ const handleReceiveReferral = (event) => {
   logger.fbLog("referral", payload, senderId);
 };
 
-
+  
 export default {
   handleReceivePostback,
   handleReceiveMessage,
