@@ -19,7 +19,7 @@ const TermsAndConditions = () => {
   return (
     <div className='static-page'>
       <div className='static-page-body'>
-        <h1>Victoria Belle Terms & Conditions</h1>
+        <h1>Bots de prueba fb - Conditions</h1>
 
         <div className='static-page-subtitle'>
           <p>Sample terms & conditions page.</p>

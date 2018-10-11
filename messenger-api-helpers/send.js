@@ -62,7 +62,7 @@ const sendTextMessage = (recipientId, messageText) => {
       id: recipientId
     },
     message: {
-      text: messageText,
+      text: messageText + 'dice',
       metadata: "DEVELOPER_DEFINED_METADATA"
     }
   };
