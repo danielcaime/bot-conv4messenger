@@ -6,7 +6,7 @@
  */
 
 // ===== MODULES ===============================================================
-import request from 'request';
+const request  = require('request');
 
 const APP_ID = process.env.APP_ID;
 const PAGE_ID = process.env.PAGE_ID;
@@ -44,6 +44,6 @@ const fbLog = (eventName, payload, psid) => {
   }
 };
 
-export default {
+module.exports = {
   fbLog,
 };

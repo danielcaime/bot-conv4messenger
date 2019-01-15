@@ -6,12 +6,12 @@
  */
 
 // ===== LODASH ================================================================
-import castArray from 'lodash/castArray';
+const castArray = require('lodash/castArray');
 
 // ===== MESSENGER =============================================================
-import api from './api';
-import messages from './messages';
-import logger from './fba-logging';
+const api = require( './api');
+const messages = require('./messages');
+const logger = require( './fba-logging');
 
 // Turns typing indicator on.
 const typingOn = (recipientId) => {
@@ -122,7 +122,7 @@ const sendGiftPurchasedMessage = (recipientId, giftId) =>
   sendMessage(recipientId, messages.giftPurchasedMessage(giftId));
 
 
-export default {
+  module.exports =  {
   sendMessage,
   sendReadReceipt,
   sendHelloRewardMessage,

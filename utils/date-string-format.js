@@ -35,7 +35,7 @@ const nth = (day) => {
  * @param {Boolean} includeYear If true append year
  * @returns {String} Formatted date.
  */
-export const dateString = (date, includeYear = false) => {
+module.exports =  dateString = (date, includeYear = false) => {
   // Prevent daylight savings from interfering with date
   const normalizedDate = `${date}T12:30:30.30`;
   const dateObj = new Date(normalizedDate);

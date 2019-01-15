@@ -6,11 +6,11 @@
  */
 
 // ===== LODASH ================================================================
-import castArray from 'lodash/castArray';
-import isEmpty from 'lodash/isEmpty';
+const castArray = require('lodash/castArray');
+const isEmpty = require('lodash/isEmpty');
 
 // ===== MODULES ===============================================================
-import request from 'request';
+const request = require('request');
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -90,7 +90,7 @@ const callThreadAPI = (messageDataArray, queryParams = {}) => {
   return callAPI('thread_settings', messageDataArray, queryParams);
 };
 
-export default {
+module.exports = {
   callMessagesAPI,
   callThreadAPI,
 };

@@ -6,11 +6,11 @@
  */
 
 // ===== MODULES ===============================================================
-import express from 'express';
+const express = require('express');
 
 // ===== MESSENGER =============================================================
-import receiveApi from '../messenger-api-helpers/receive';
-import logger from '../messenger-api-helpers/fba-logging';
+const receiveApi = require('../messenger-api-helpers/receive');
+const logger = require('../messenger-api-helpers/fba-logging');
 
 const router = express.Router();
 
@@ -80,4 +80,4 @@ router.post('/', (req, res) => {
   }
 });
 
-export default router;
+module.exports =  router;

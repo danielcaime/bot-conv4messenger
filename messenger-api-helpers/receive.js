@@ -6,12 +6,12 @@
  */
 
 // ===== MODULES ===============================================================
-import sendApi from './send';
-import Wit from 'node-wit';
+const sendApi = require('./send');
+const Wit = require('node-wit');
 
 // ===== STORES ================================================================
 //import UserStore from '../stores/user-store';
-import logger from './fba-logging';
+const logger = require('./fba-logging');
 const util = require('util');
 
 // Updates a users preferred gift, then notifies them of the change.
@@ -139,7 +139,7 @@ const handleReceiveReferral = (event) => {
 };
 
   
-export default {
+module.exports =  {
   handleReceivePostback,
   handleReceiveMessage,
   handleReceiveReferral,

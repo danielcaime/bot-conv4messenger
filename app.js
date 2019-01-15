@@ -6,22 +6,19 @@
  */
 
 // ===== MODULES ===============================================================
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import express from 'express';
-import favicon from 'serve-favicon';
-import logger from 'morgan';
-import path from 'path';
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const logger = require('morgan');
+const path = require('path');
 
 // ===== MESSENGER =============================================================
-import ThreadSetup from './messenger-api-helpers/thread-setup';
+//const ThreadSetup = require('./messenger-api-helpers/thread-setup');
 
 // ===== ROUTES ================================================================
-import gifts from './routes/gifts';
-import index from './routes/index';
-//import users from './routes/users';
-import webhooks from './routes/webhooks';
-import terms from './routes/terms';
+
+const webhooks = require('./routes/webhooks');
+//const index = require('./routes/index');
 
 const app = express();
 
@@ -31,12 +28,11 @@ const app = express();
 
 /* ----------  Views  ---------- */
 
-app.set('view engine', 'ejs');
+
 
 /* ----------  Static Assets  ---------- */
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 /* ----------  Parsers  ---------- */
 
@@ -54,11 +50,11 @@ app.use(logger('dev'));
 
 /* ----------  Primary / Happy Path  ---------- */
 
-app.use('/', index);
+//app.use('/', index);
 //app.use('/users', users);
-app.use('/gifts', gifts);
+//app.use('/gifts', gifts);
 app.use('/webhook', webhooks);
-app.use('/terms', terms);
+-//app.use('/terms', terms);
 
 /* ----------  Errors  ---------- */
 
@@ -81,9 +77,9 @@ app.use(function(err, req, res) {
 
 /* ----------  Messenger setup  ---------- */
 
-ThreadSetup.setDomainWhitelisting();
-ThreadSetup.setPersistentMenu();
-ThreadSetup.setGetStarted();
+// ThreadSetup.setDomainWhitelisting();
+// ThreadSetup.setPersistentMenu();
+// ThreadSetup.setGetStarted();
 
 /* =============================================
    =                 Port Setup                =
