@@ -19,13 +19,13 @@ import ThreadSetup from './messenger-api-helpers/thread-setup';
 // ===== ROUTES ================================================================
 import gifts from './routes/gifts';
 import index from './routes/index';
-import users from './routes/users';
+//import users from './routes/users';
 import webhooks from './routes/webhooks';
 import terms from './routes/terms';
 
 const app = express();
 
-/* =============================================
+/* ============================================= 
    =           Basic Configuration             =
    ============================================= */
 
@@ -55,7 +55,7 @@ app.use(logger('dev'));
 /* ----------  Primary / Happy Path  ---------- */
 
 app.use('/', index);
-app.use('/users', users);
+//app.use('/users', users);
 app.use('/gifts', gifts);
 app.use('/webhook', webhooks);
 app.use('/terms', terms);

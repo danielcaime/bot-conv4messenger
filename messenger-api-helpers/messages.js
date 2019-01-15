@@ -16,8 +16,8 @@
  */
 
 // ===== STORES ================================================================
-import UserStore from '../stores/user-store';
-import GiftStore from '../stores/gift-store';
+// import UserStore from '../stores/user-store';
+// import GiftStore from '../stores/gift-store';
 
 
 // ===== UTILS =================================================================
@@ -204,31 +204,6 @@ const giftChangedMessage = (recipientId) => {
 };
 
 /**
- * Message thanking user for their purchase.
- *
- * @param {String} giftId Id of the purchased item.
- * @returns {Object} Message payload
- */
-const giftPurchasedMessage = (giftId) => {
-  const purchasedItem = GiftStore.get(giftId);
-  return {
-    text: `Thank you for purchasing the ${purchasedItem.name}!  `,
-  };
-};
-
-/**
- * The persistent menu for users to use.
- */
-const persistentMenu = {
-  setting_type: 'call_to_actions',
-  thread_state: 'existing_thread',
-  call_to_actions: [
-    setPreferencesButton,
-    changeGiftButton,
-  ],
-};
-
-/**
  * The Get Started button.
  */
 const getStarted = {
@@ -251,7 +226,5 @@ export default {
   giftOptionsText,
   giftOptionsCarosel,
   giftChangedMessage,
-  giftPurchasedMessage,
-  persistentMenu,
   getStarted,
 };
