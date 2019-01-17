@@ -1,83 +1,76 @@
+
 /**
- * Copyright 2017-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
+ * daniel caime
  */
 
-// ===== MODULES ===============================================================
-const express = require('express');
 
-// ===== MESSENGER =============================================================
-const receiveApi = require('../messenger-api-helpers/receive');
-const logger = require('../messenger-api-helpers/fba-logging');
+var express = require('express');
 
 const router = express.Router();
+//take token from enviroment - dcaime
+const token = process.env.WEBHOOK_TOKEN || '123456';
 
-/**
- * This is used so that Facebook can verify that they have
- * the correct Webhook location for your app.
- *
- * The Webhook token must be set in your app's configuration page
- * as well as in your servers environment.
- */
-router.get('/', (req, res) => {
-  if (req.query['hub.verify_token'] === process.env.WEBHOOK_TOKEN) {
-    res.send(req.query['hub.challenge']);
-  } else {
-    res.send('Error, wrong token');
-  }
-});
+var get = router.get('/', (req, res) => {
+    console.log('llamada al webhook')
+    if (req.query['hub.verify_token'] === token) {
+      res.send(req.query['hub.challenge']);
+    } else {
+        var error = 'Error, token inválido '+ req.query['hub.verify_token'];
+      res.send(error);
+      console.log(error);
+    }
+  });
+  
+  router.post('/', (req, res) => {
+    //return satus
+    res.sendStatus(200);
+    const data = req.body;
 
-/**
- * Once your Webhook is verified this is where you will receive
- * all interactions from the users of you Messenger Application.
- *
- * You can subscribe to many different types of messages.
- * However for this demo we've only handled what is necessary:
- * 1. Regular messages
- * 2. Postbacks
- */
-router.post('/', (req, res) => {
-  /*
-    You must send back a status of 200(success) within 20 seconds
-    to let us know you've successfully received the callback.
-    Otherwise, the request will time out.
+    if (data.object === 'page') {
+        // Iterate over each entry
+        // There may be multiple if batched
+        data.entry.forEach((pageEntry) => {
+            pageEntry.messaging.forEach((messagingEvent) => {
+                if (messagingEvent.message) {
+                    sendTextMessage(sender, text.substring(0, 200))
+                }
+            });
 
-    When a request times out from Facebook the service attempts
-    to resend the message.
+        });
+    }
+  });
 
-    This is why it is good to send a response immediately so you
-    don't get duplicate messages in the event that a request takes
-    awhile to process.
-  */
-  res.sendStatus(200);
-
-  const data = req.body;
-
-  // Make sure this is a page subscription
-  if (data.object === 'page') {
-    // Iterate over each entry
-    // There may be multiple if batched
-    data.entry.forEach((pageEntry) => {
-      // Iterate over each messaging event and handle accordingly
-      pageEntry.messaging.forEach((messagingEvent) => {
-        console.log({messagingEvent});
-        if (messagingEvent.message) {
-          receiveApi.handleReceiveMessage(messagingEvent);
-        } else if (messagingEvent.postback) {
-          receiveApi.handleReceivePostback(messagingEvent);
-        } else if (messagingEvent.referral) {
-          receiveApi.handleReceiveReferral(messagingEvent);
-        } else {
-          console.log(
-            'Webhook received unknown messagingEvent: ',
-            messagingEvent
-          );
+  function sendTextMessage(sender, text) {
+    
+    $.ajax({
+        url: 'https://api.wit.ai/message',
+        data: {
+          'q': text,
+          'access_token' : 'FUPT7DGZEVHMF3Y4U32XVXHFCLPENGYX'
+        },
+        dataType: 'jsonp',
+        method: 'GET',
+        success: function(response) {
+            console.log("success!", response);
         }
-      });
-    });
-  }
-});
-
-module.exports =  router;
+  });
+        let messageData = { text: text }
+    
+        request({
+            url: 'https://graph.facebook.com/v2.6/me/messages',
+            qs: { access_token: token },
+            method: 'POST',
+            json: {
+                recipient: { id: sender },
+                message: messageData,
+            }
+        }, function (error, response, body) {
+            if (error) {
+                console.log('Error sending messages: ', error)
+            } else if (response.body.error) {
+                console.log('Error: ', response.body.error)
+            }
+        })
+    }
+    
+  module.exports = get;
