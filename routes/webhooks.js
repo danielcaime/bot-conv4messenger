@@ -30,6 +30,10 @@ var get = router.get('/', (req, res) => {
         // Iterate over each entry
         // There may be multiple if batched
         data.entry.forEach((pageEntry) => {
+            let wh_event = messagingEvent[0];
+            let sender = wh_event.sender.id;
+
+
             pageEntry.messaging.forEach((messagingEvent) => {
                 if (messagingEvent.message) {
                     sendTextMessage(sender, text.substring(0, 200))

@@ -20,6 +20,7 @@ var index = require('./routes/index');
 //var search = require('./routes/search');
 var webhooks = require('./routes/webhooks');
 //
+var gifts = require('./routes/gifts.js');
 const app = express();
 
 /* ----------  Static Assets  ---------- */
@@ -41,6 +42,7 @@ app.use(express.static(__dirname));
 app.use('/',index);
 //app.use('/search',search);
 app.use('/webhook',webhooks);
+app.use('/gift', gifts);
 
 /**
  * errors
