@@ -46,18 +46,18 @@ var get = router.get('/', (req, res) => {
 
   function sendTextMessage(sender, text) {
     
-    $.ajax({
-        url: 'https://api.wit.ai/message',
-        data: {
-          'q': text,
-          'access_token' : 'FUPT7DGZEVHMF3Y4U32XVXHFCLPENGYX'
-        },
-        dataType: 'jsonp',
-        method: 'GET',
-        success: function(response) {
-            console.log("success!", response);
-        }
-  });
+//     $.ajax({
+//         url: 'https://api.wit.ai/message',
+//         data: {
+//           'q': text,
+//           'access_token' : 'FUPT7DGZEVHMF3Y4U32XVXHFCLPENGYX'
+//         },
+//         dataType: 'jsonp',
+//         method: 'GET',
+//         success: function(response) {
+//             console.log("success!", response);
+//         }
+//   });
         let messageData = { text: text }
     
         request({
