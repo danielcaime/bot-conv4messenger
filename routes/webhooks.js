@@ -30,13 +30,13 @@ var get = router.get('/', (req, res) => {
         // Iterate over each entry
         // There may be multiple if batched
         data.entry.forEach((pageEntry) => {
-            let wh_event = messagingEvent[0];
-            let sender = wh_event.sender.id;
+            // let wh_event = messagingEvent[0];
+            // let sender = wh_event.sender.id;
 
 
             pageEntry.messaging.forEach((messagingEvent) => {
                 if (messagingEvent.message) {
-                    sendTextMessage(sender, text.substring(0, 200))
+                    sendTextMessage(messagingEvent)//text.substring(0, 200))
                 }
             });
 
@@ -44,8 +44,9 @@ var get = router.get('/', (req, res) => {
     }
   });
 
-  function sendTextMessage(sender, text) {
-    
+  function sendTextMessage(event) {
+    const message  = event.message;
+    const senderid = event.sender.id;
 //     $.ajax({
 //         url: 'https://api.wit.ai/message',
 //         data: {
@@ -58,14 +59,14 @@ var get = router.get('/', (req, res) => {
 //             console.log("success!", response);
 //         }
 //   });
-        let messageData = { text: text }
+        let messageData = { text: message }
     
         request({
             url: 'https://graph.facebook.com/v2.6/me/messages',
             qs: { access_token: token },
             method: 'POST',
             json: {
-                recipient: { id: sender },
+                recipient: { id: senderid },
                 message: messageData,
             }
         }, function (error, response, body) {

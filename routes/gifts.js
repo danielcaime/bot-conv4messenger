@@ -6,7 +6,8 @@
  */
 
 // ===== MODULES ===============================================================
-import express from 'express';
+//import express from 'express';
+var express = require('express');
 
 // ===== STORES ================================================================
 // import GiftStore from '../stores/gift-store';
@@ -46,4 +47,4 @@ router.get('/', (req, res) => {
   );
 });
 
-export default router;
+module.exports = router;
